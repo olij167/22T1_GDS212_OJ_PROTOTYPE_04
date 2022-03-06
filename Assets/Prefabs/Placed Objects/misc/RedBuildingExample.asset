@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba806386ff5984147a64aac7b68554d8, type: 3}
+  m_Name: RedBuildingExample
+  m_EditorClassIdentifier: 
+  itemName: Red Building Example
+  itemIcon: {fileID: 21300000, guid: 166c66c87874dcb498c10ec4ba4e74e0, type: 3}
+  itemPrefab: {fileID: 5546381005292139869, guid: ebf1bf2afed12874381fad5501ed896a, type: 3}
+  buildingVisual: {fileID: 0}
+  width: 2
+  height: 1

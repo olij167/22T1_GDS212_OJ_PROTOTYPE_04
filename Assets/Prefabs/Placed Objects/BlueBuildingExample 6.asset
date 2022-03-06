@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba806386ff5984147a64aac7b68554d8, type: 3}
+  m_Name: BlueBuildingExample 6
+  m_EditorClassIdentifier: 
+  itemName: Observatory
+  itemIcon: {fileID: 21300000, guid: ab10527356f16964ba410acc422c020c, type: 3}
+  itemPrefab: {fileID: 5546381005292139869, guid: 86fcc1749853d884e935c815c8e9a083, type: 3}
+  buildingVisual: {fileID: 0}
+  width: 2
+  height: 1
+  plusStat: Spiritual
+  minusStat: Physical
