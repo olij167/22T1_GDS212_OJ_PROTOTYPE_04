@@ -5,23 +5,39 @@ using UnityEngine;
 public class MousePosition : MonoBehaviour
 {
     public Vector3 whereToBe;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    public PilgrimUI pilgrimUI;
+
+    public PilgrimAI selectedPilgrim;
+
+    public SpawnPilgrim spawn;
 
     // Update is called once per frame
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
         //mousePos.z = Camera.main.nearClipPlane;
-        mousePos.z = 1f;
+        mousePos.z = -1f;
         Vector3 Worldpos = Camera.main.ScreenToWorldPoint(mousePos);
         //Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
         whereToBe = new Vector3(Worldpos.x, Worldpos.y, mousePos.z);
         transform.position = whereToBe;
-        //Debug.Log(whereToBe);
-    }
 
+        //selectedPilgrim = pilgrimUI.selectedPilgrim;
+        //Debug.Log(whereToBe);
+        //RaycastHit2D hit;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+        {
+            if (hit.transform.CompareTag("Pilgrim"))
+            {
+
+                selectedPilgrim = hit.transform.GetComponent<PilgrimAI>();
+                selectedPilgrim = hit.transform.GetComponent<PilgrimAI>();
+                pilgrimUI.selectedPilgrim = selectedPilgrim;
+                pilgrimUI.UpdatePilgrimUI();
+
+            }
+        }
+    }
 }

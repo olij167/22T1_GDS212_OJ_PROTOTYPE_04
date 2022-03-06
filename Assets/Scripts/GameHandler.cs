@@ -92,13 +92,13 @@ public class GameHandler : MonoBehaviour
             cameraFollowPosition.x -= moveAmount * Time.deltaTime;
         }
 
-        
+        ScrollBarFollowCamera();
+
 
         // start & end of screen limits
         if (cameraFollowPosition.x <= leftEdgeMarker.position.x)
         {
             cameraFollowPosition.x = leftEdgeMarker.position.x;
-            //cameraScrollBar.value = 0f;
         }
 
         if (cameraFollowPosition.x >= rightEdgeMarker.position.x)
@@ -107,59 +107,24 @@ public class GameHandler : MonoBehaviour
             //cameraScrollBar.value = 1f;
         }
 
-        distanceFromLeftEdge = Vector3.Distance(cameraFollowPosition, rightEdgeMarker.position);
-        distanceFromRightEdge = Vector3.Distance(leftEdgeMarker.position, cameraFollowPosition);
 
-        //distanceAlongTrail = distanceFromRightEdge / distanceFromLeftEdge;
 
-        distanceAlongTrail = Mathf.Clamp01(distanceFromRightEdge / distanceFromLeftEdge);
-
-        cameraScrollBar.value = Mathf.Lerp(0f, 1f, distanceAlongTrail);
-        //cameraFollowPosition.x = Mathf.Clamp(trailLength, leftEdgeMarker.position.x, rightEdgeMarker.position.x);
 
 
     }
 
-    public void ScrollBarMovement()
+    void ScrollBarFollowCamera()
     {
+        distanceAlongTrail = Mathf.Clamp(cameraFollowPosition.x, leftEdgeMarker.position.x, trailLength) / trailLength;
 
 
-        //float camScrollBarPos = Mathf.Clamp(trailLength, 0f, 1f);
+        cameraScrollBar.value = distanceAlongTrail;
+    }
 
-
-        //cameraFollowPosition.x = Mathf.Lerp(leftEdgeMarker.position.x, rightEdgeMarker.position.x, trailLength);
-
-
-        //cameraFollowPosition.x += Mathf.Clamp(trailLength, leftEdgeMarker.position.x, rightEdgeMarker.position.x) * moveAmount * Time.deltaTime;
-
-        
-
-        //float camScrollBarPos = Mathf.Clamp(cameraFollowPosition.x, Vector3.Distance(cameraFollowPosition, leftEdgeMarker.position), Vector3.Distance(cameraFollowPosition, rightEdgeMarker.position));
-
-        //float scrollBarWorldPos = Mathf.Clamp01(trailLength);
-
-        //cameraScrollBar.value = Mathf.Lerp(scrollBarWorldPos, cameraFollowPosition.x, 0);
-
-        //cameraScrollBar.value = Mathf.Lerp( leftEdgeMarker.position.x, trailLength, cameraFollowPosition.x);
-
-
-        //if (cameraFollowPosition.x == leftEdgeMarker.position.x)
-        //{
-        //    cameraScrollBar.value = 0f;
-        //}
-        
-        //if (cameraFollowPosition.x == rightEdgeMarker.position.x)
-        //{
-        //    cameraScrollBar.value = 1f;
-        //}
-
-        
-
-        
-
-
-
-
+    public void ScrollBarMoveCamera()
+    {
+        distanceAlongTrail = cameraScrollBar.value;
+        cameraFollowPosition.x = distanceAlongTrail * trailLength;
     }
 
 

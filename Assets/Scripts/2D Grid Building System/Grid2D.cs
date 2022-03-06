@@ -44,7 +44,7 @@ public class Grid2D<TGridObject>
         }
 
                 //Debug.Log(width + ", " + height);
-        bool showDebug = true;
+        bool showDebug = false;
 
         if (showDebug)
         {
