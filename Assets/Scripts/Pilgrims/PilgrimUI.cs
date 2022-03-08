@@ -7,13 +7,17 @@ using TMPro;
 public class PilgrimUI : MonoBehaviour
 {
     public Slider physicalStatBar, mentalStatBar, spiritualStatBar, socialStatBar;
-    //public Slider physicalStatFill, mentalStatFill, spiritualStatFill, socialStatFill;
+    public TextMeshProUGUI physicalStatValue, mentalStatValue, spiritualStatValue, socialStatValue;
 
     public PilgrimAI selectedPilgrim;
 
     public SpawnPilgrim spawn;
 
-    public TextMeshProUGUI pilgrimName, pilgrimResolution;
+    public EndOfTrailTrigger end;
+
+    public TextMeshProUGUI pilgrimName, pilgrimResolution, pilgrimEffectOnScoreText;
+
+    float pilgrimScoreEffectOnTotal, pilgrimResolutionStat, totalScore;
 
 
     // Start is called before the first frame update
@@ -67,6 +71,7 @@ public class PilgrimUI : MonoBehaviour
         UpdateMentalStatBar();
         UpdateSpiritualStatBar();
         UpdateSocialStatBar();
+        UpdateEffectOnScore();
 
     }
 
@@ -79,21 +84,87 @@ public class PilgrimUI : MonoBehaviour
     public void UpdatePhysicalStatBar()
     {
         physicalStatBar.value = Mathf.Clamp(selectedPilgrim.physicalStat / selectedPilgrim.maxPhysicalStat, 0f, 1f);
+        //physicalStatValue.text = physicalStatBar.value.ToString("P");
+        float valueStringFormat = physicalStatBar.value * 100;
+        physicalStatValue.text = valueStringFormat.ToString("00");
     }
     public void UpdateMentalStatBar()
     {
         mentalStatBar.value = Mathf.Clamp(selectedPilgrim.mentalStat / selectedPilgrim.maxMentalStat, 0f, 1f);
+        //mentalStatValue.text = mentalStatBar.value.ToString("P");
+        float valueStringFormat = mentalStatBar.value * 100;
+        mentalStatValue.text = valueStringFormat.ToString("00");
+
 
     }
     public void UpdateSpiritualStatBar()
     {
         spiritualStatBar.value = Mathf.Clamp(selectedPilgrim.spiritualStat / selectedPilgrim.maxSpiritualStat, 0f, 1f);
+        //spiritualStatValue.text = spiritualStatBar.value.ToString("P");
+        float valueStringFormat = spiritualStatBar.value * 100;
+        spiritualStatValue.text = valueStringFormat.ToString("00");
+
 
     }
     public void UpdateSocialStatBar()
     {
         socialStatBar.value = Mathf.Clamp(selectedPilgrim.socialStat / selectedPilgrim.maxSocialStat, 0f, 1f);
+        float valueStringFormat = socialStatBar.value * 100;
+        socialStatValue.text = valueStringFormat.ToString("00");
 
+
+    }
+
+    public void UpdateEffectOnScore()
+    {
+        
+
+        if (end.numOfPilgrimsFinished <= 0)
+        {
+            pilgrimScoreEffectOnTotal = GetResolutionStat(pilgrimResolutionStat);
+        }
+        else pilgrimScoreEffectOnTotal = (end.totalScore + GetResolutionStat(pilgrimResolutionStat)) / (end.numOfPilgrimsFinished + 1) - (totalScore / end.numOfPilgrimsFinished);
+        
+
+        //Debug.Log("total score = " + totalScore);
+        //Debug.Log("pilgrims finished = " + numOfPilgrims);
+
+        Debug.Log("pilgrim effect on score = " + pilgrimScoreEffectOnTotal);
+
+        pilgrimEffectOnScoreText.text = pilgrimScoreEffectOnTotal.ToString("00");
+
+        
+    }
+
+    public float GetResolutionStat(float pilgrimMainStat)
+    {
+        switch (selectedPilgrim.statToEnrich)
+        {
+            case "Physical":
+                {
+                    pilgrimMainStat = selectedPilgrim.physicalStat;
+                    break;
+                }
+            case "Mental":
+                {
+                    pilgrimMainStat = selectedPilgrim.mentalStat;
+                    break;
+                }
+            case "Social":
+                {
+                    pilgrimMainStat = selectedPilgrim.socialStat;
+                    break;
+                }
+            case "Spiritual":
+                {
+                    pilgrimMainStat = selectedPilgrim.spiritualStat;
+                    break;
+                }
+        }
+
+        Debug.Log(pilgrimMainStat);
+
+        return pilgrimMainStat;
     }
 
 

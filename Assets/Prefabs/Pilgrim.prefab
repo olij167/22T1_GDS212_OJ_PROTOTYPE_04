@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4819072224564441394}
   - component: {fileID: 4819072224564441389}
   - component: {fileID: 4819072224564441388}
-  - component: {fileID: 2376736415184503599}
   m_Layer: 0
   m_Name: Pilgrim
   m_TagString: Pilgrim
@@ -222,7 +221,7 @@ MonoBehaviour:
   physicalStat: 0
   mentalStat: 0
   socialStat: 0
-  moveSpeed: 0.01
+  moveSpeed: 0.025
   maxSpiritualStat: 100
   maxPhysicalStat: 100
   maxMentalStat: 100
@@ -231,19 +230,3 @@ MonoBehaviour:
   firstName: 
   lastName: 
   atBuilding: 0
---- !u!70 &2376736415184503599
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819072224564441393}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_Size: {x: 2, y: 4}
-  m_Direction: 0

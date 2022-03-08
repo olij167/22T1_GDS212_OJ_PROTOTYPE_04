@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [CreateAssetMenu (menuName = "Placed Objects")]
 public class PlacedObject : ScriptableObject
@@ -11,6 +12,8 @@ public class PlacedObject : ScriptableObject
     public int width, height;
 
     public string plusStat, minusStat;
+
+    //public TextMeshProUGUI plusStatText, minusStatText;
 
     public List<Vector2Int> GetGridPositionList(Vector2Int offset)
     {

@@ -16,6 +16,8 @@ public class GridBuildingSystem : MonoBehaviour
     public float cellSize = 1f;
     public GameHandler gameHandler;
 
+    public int demolishAllowance = 3;
+
     //[SerializeField] private BuildAreaVisual buildAreaVisual;
 
 
@@ -40,6 +42,7 @@ public class GridBuildingSystem : MonoBehaviour
         private int x;
         private int y;
         private Transform transform;
+        private Vector2 origin;
         //private Mesh mesh;
         //private bool updateMesh;
 
@@ -50,6 +53,7 @@ public class GridBuildingSystem : MonoBehaviour
             this.grid = grid;
             this.x = x;
             this.y = y;
+            
             //this.mesh = mesh;
             //this.canBuild = canBuild;
         }
@@ -59,8 +63,16 @@ public class GridBuildingSystem : MonoBehaviour
             this.transform = transform;
             //UpdateBuildAreaVisual();
             grid.TriggerGridObjectChanged(x, y);
-            
+        }
 
+        public void SetOrigin(Vector2 origin)
+        {
+            this.origin = origin;
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
         }
 
         public void ClearTransform()
@@ -75,6 +87,8 @@ public class GridBuildingSystem : MonoBehaviour
         {
             return transform == null;
         }
+
+        
 
         //public Color SetCellColour()
         //{
@@ -117,17 +131,60 @@ public class GridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
+        CreateBuilding();
+
+        if (demolishAllowance > 0)
+        {
+            DemolishBuilding();
+        }
+
+        if (inventoryController.selectedItem != null)
+            selectedObject = inventoryController.selectedItem;
+        else selectedObject = default;
+
+        
+    }
+
+    public void DemolishBuilding()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            grid.GetXY(mousePos.whereToBe, out int x, out int y);
+
+            GridObject gridObject = grid.GetGridObject(x, y);
+
+            Transform trigger = gridObject.GetTransform();
+
+            if (trigger != null)
+            {
+                Destroy(trigger.gameObject);
+
+                demolishAllowance--;
+
+                List<Vector2Int> gridPositionList = trigger.GetComponent<BuildingTrigger>().GetGridPositionList();
+
+                foreach (Vector2Int gridPos in gridPositionList)
+                {
+                    grid.GetGridObject(gridPos.x, gridPos.y).ClearTransform();
+                }
+
+            }
+        }
+    }
+
+    public void CreateBuilding()
+    {
         if (Input.GetMouseButtonDown(0) && selectedObject != null)
         {
             grid.GetXY(mousePos.whereToBe, out int x, out int y);
 
             List<Vector2Int> gridPositionList = selectedObject.GetGridPositionList(new Vector2Int(x, y));
 
-            GridObject gridObject = grid.GetGridObject(x, y);
+            grid.GetGridObject(x, y);
 
             bool canBuild = true;
 
-            foreach(Vector2Int gridPosition in gridPositionList)
+            foreach (Vector2Int gridPosition in gridPositionList)
             {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
                 {
@@ -139,19 +196,20 @@ public class GridBuildingSystem : MonoBehaviour
 
             if (canBuild)
             {
-               GameObject builtTransform = Instantiate(selectedObject.itemPrefab.gameObject, grid.GetWorldPosition(x, y), Quaternion.identity);
-
-                //gameHandler.buildingsList.Add(builtTransform.transform);
-                //gameHandler.AddBuildingButton(builtTransform.transform);
+                GameObject builtTransform = Instantiate(selectedObject.itemPrefab.gameObject, grid.GetWorldPosition(x, y), Quaternion.identity);
+                //BuildingTrigger buildingTrigger = BuildingTrigger.Create(grid.GetWorldPosition(x, y), new Vector2Int(x, y), selectedObject);
 
                 foreach (Vector2Int gridPosition in gridPositionList)
                 {
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetTransform(builtTransform.transform);
+
                     //grid.GetGridObject(gridPosition.x, gridPosition.y).SetCellColour();
                     //grid.GetGridObject(gridPosition.x, gridPosition.y).UpdateBuildAreaVisual();
                 }
 
                 inventoryController.SetNewItem(inventoryController.selectedSlot);
+
+                inventoryController.selectedSlot.ResetColour();
 
                 inventoryController.selectedItem = null;
                 inventoryController.selectedSlot = null;
@@ -164,10 +222,6 @@ public class GridBuildingSystem : MonoBehaviour
                 UtilsClass.CreateWorldTextPopup("Cannot build here", mousePos.whereToBe);
             }
         }
-
-        if (inventoryController.selectedItem != null)
-            selectedObject = inventoryController.selectedItem;
-        else selectedObject = default;
     }
 
 

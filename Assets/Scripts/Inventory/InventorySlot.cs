@@ -16,7 +16,7 @@ public class InventorySlot : MonoBehaviour
     public Sprite itemIcon;
 
     public Image itemIconUI;
-    public TextMeshProUGUI itemNameUI;
+    public TextMeshProUGUI itemNameUI, plusStatUI, minusStatUI;
     public Button itemButton;
 
     //private void Start()
@@ -39,7 +39,10 @@ public class InventorySlot : MonoBehaviour
         itemName = setItem.itemName;
 
         itemIconUI.sprite = itemIcon;
-        itemNameUI.text = itemName + "\n" + "+" + setItem.plusStat + "\n" + "-" + setItem.minusStat;
+        itemNameUI.text = itemName;
+        plusStatUI.text = "+" + setItem.plusStat;
+        minusStatUI.text = "-" + setItem.minusStat;
+
 
         inventoryItem = setItem;
     }
@@ -47,11 +50,21 @@ public class InventorySlot : MonoBehaviour
 
     public void SelectItem()
     {
+        ResetColour();
 
-            //inventoryItem.Use();
-            inventoryController.selectedSlot = itemButton.GetComponentInParent<InventorySlot>();
-            inventoryController.selectedItem = inventoryItem;
+        inventoryController.selectedSlot = itemButton.GetComponentInParent<InventorySlot>();
+        inventoryController.selectedItem = inventoryItem;
+        GetComponent<Image>().color = Color.yellow;
 
+
+    }
+
+    public void ResetColour()
+    {
+        if (inventoryController.selectedSlot != null)
+        {
+            inventoryController.selectedSlot.GetComponent<Image>().color = Color.white;
+        }
     }
 
     //private void OnDisable()

@@ -23,6 +23,16 @@ public class MousePosition : MonoBehaviour
         whereToBe = new Vector3(Worldpos.x, Worldpos.y, mousePos.z);
         transform.position = whereToBe;
 
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    SetNewPilgrim();
+        //}
+    }
+
+    void SetNewPilgrim()
+    {
+        
+
         //selectedPilgrim = pilgrimUI.selectedPilgrim;
         //Debug.Log(whereToBe);
         //RaycastHit2D hit;
@@ -38,6 +48,21 @@ public class MousePosition : MonoBehaviour
                 pilgrimUI.UpdatePilgrimUI();
 
             }
+            else
+            {
+                Debug.Log(hit.transform.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Pilgrim"))
+        {
+            selectedPilgrim = other.transform.GetComponent<PilgrimAI>();
+            selectedPilgrim = other.transform.GetComponent<PilgrimAI>();
+            pilgrimUI.selectedPilgrim = selectedPilgrim;
+            pilgrimUI.UpdatePilgrimUI();
         }
     }
 }

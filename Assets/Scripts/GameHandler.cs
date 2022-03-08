@@ -109,8 +109,6 @@ public class GameHandler : MonoBehaviour
 
 
 
-
-
     }
 
     void ScrollBarFollowCamera()

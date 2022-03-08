@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LGreenBuildingExample 7
   m_EditorClassIdentifier: 
   itemName: Stadium
-  itemIcon: {fileID: 21300000, guid: 092c7db3c7d8da542bd989bd851d303d, type: 3}
+  itemIcon: {fileID: 21300000, guid: 450dfc2cafb808e4cb53138bd3ad6ab6, type: 3}
   itemPrefab: {fileID: 5546381005292139869, guid: e12f0dbe6a8b6e9419a819198ae11d15, type: 3}
   buildingVisual: {fileID: 0}
   width: 2
