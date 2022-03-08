@@ -20922,11 +20922,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Pay attention to each pilgrim''s Resolution and place buildings in order
-    to maximise their respective stat
+    to maximise their respective stat.
 
+    Each time a pilgrim reaches the end of
+    the trail, you may demolish a building
 
-    After 10 pilgrim''s have finished their
-    journey it is game over'
+    After 10 pilgrim''s have finished
+    their journey it is game over'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23780,8 +23782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 257}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: -97.9, y: 214.6}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1583860890
 MonoBehaviour:
@@ -23803,14 +23805,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
+  m_text: 'Left Click on your an item (top left) to select
 
-    Left Click on your an item (top left) to select
+    Left Click in the
+    Blue Area to place an item
 
-    Left Click
-    in the Blue Area to place an item
+    Right Click on a building to demolish
 
-    Hover over a pilgrim to view their stats'
+    Hover
+    over a pilgrim to view their stats'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23923,7 +23926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -157.8}
+  m_AnchoredPosition: {x: 250, y: -233.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595441581
@@ -24763,7 +24766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -157.8}
+  m_AnchoredPosition: {x: -250, y: -233.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794552174
